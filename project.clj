@@ -7,4 +7,5 @@
   :repl-options {:init-ns aoc-2024.core
                  :init (do
                         (require '[aoc-2024.puzzles.day1 :as d1])
-                        (in-ns 'aoc-2024.puzzles.day1))})
+                        (require '[aoc-2024.puzzles.day2 :as d2])
+                        (in-ns 'aoc-2024.puzzles.day2))})
