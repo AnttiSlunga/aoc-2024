@@ -9,4 +9,5 @@
                         (require '[aoc-2024.puzzles.day1 :as d1])
                         (require '[aoc-2024.puzzles.day2 :as d2])
                         (require '[aoc-2024.puzzles.day3 :as d3])
+                        (require '[aoc-2024.puzzles.day4 :as d4])
                         (in-ns 'aoc-2024.puzzles.day2))})

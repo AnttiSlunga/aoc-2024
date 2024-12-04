@@ -5,3 +5,8 @@
 (defn get-input [day]
   (-> (slurp (io/resource day))
       (str/split #"\n")))
+
+(defn get-table-input [day]
+  (->> (-> (slurp (io/resource day))
+           (clojure.string/split #"\n"))
+       (mapv #(clojure.string/split % #"\r"))))
