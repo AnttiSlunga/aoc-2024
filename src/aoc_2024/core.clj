@@ -10,3 +10,12 @@
   (->> (-> (slurp (io/resource day))
            (clojure.string/split #"\n"))
        (mapv #(clojure.string/split % #"\r"))))
+
+(defn from [input row column]
+  (try
+    (-> (nth input row)
+        first
+        (clojure.string/split #"")
+        (nth column))
+    (catch Exception e
+      nil)))
