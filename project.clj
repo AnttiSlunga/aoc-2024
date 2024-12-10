@@ -14,4 +14,5 @@
                         (require '[aoc-2024.puzzles.day5 :as d5])
                         (require '[aoc-2024.puzzles.day6 :as d6])
                         (require '[aoc-2024.puzzles.day7 :as d7])
+                        (require '[aoc-2024.puzzles.day9 :as d9])
                         (in-ns 'aoc-2024.puzzles.day2))})
