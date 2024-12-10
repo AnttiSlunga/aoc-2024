@@ -11,6 +11,14 @@
            (clojure.string/split #"\n"))
        (mapv #(clojure.string/split % #"\r"))))
 
+(defn get-map-like-input [day]
+  (->> (-> (slurp (io/resource day))
+           (clojure.string/split #"\n"))
+       (mapv
+         #(->> (clojure.string/split % #"\r")
+              (mapv (fn [r] (map (fn [v] (Integer/parseInt v)) (clojure.string/split r #""))))
+              flatten))))
+
 (defn from [input row column]
   (try
     (-> (nth input row)
@@ -19,3 +27,26 @@
         (nth column))
     (catch Exception e
       nil)))
+
+(defn find-all [max-columns max-row row column input target coords]
+  (if (and (= row max-row) (= column max-columns))
+    coords
+    (if (= column max-columns)
+      (recur max-columns max-row (inc row) 0 input target (if (= target (reduce nth input [row column])) (conj coords [row column]) coords))
+      (recur max-columns max-row row (inc column) input target (if (= target (reduce nth input [row column])) (conj coords [row column]) coords)))))
+
+(defn search [input target]
+  (find-all (dec (count (first input))) (dec (count input)) 0 0 input target []))
+
+(defn urdl [[row column]]
+  [[(dec row) column]
+   [row (inc column)]
+   [(inc row) column]
+   [row (dec column)]])
+
+(defn urdl-values-w-coords [[_ row column] input]
+  (let [max-row (count input)
+        max-column (count (first input))]
+    (->> (urdl [row column])
+         (mapv (fn [[r c]] (if (and (>= r 0) (>= c 0) (< r max-row) (< c max-column)) [(reduce nth input [r c]) r c])))
+         (remove nil?))))
